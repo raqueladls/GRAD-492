@@ -1,0 +1,56 @@
+---
+title: "De Los Santos, Raquel Assignment 4"
+author: "Raquel De Los Santos"
+date: 
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+#data visualize for group lighting presentation
+ggplot(data = penguins, aes(x = island, y = body_mass_g)) +
+  #geom_point changes the characteristic of the points in scatter plot
+  #aes uses the sex and island to define what the output of color and shape will be
+  geom_point(aes(color = sex, 
+                 shape = island),
+             #change the size of point, alpha is opacity, and position jitter prevents overlap
+             size = 3,
+             alpha = 0.65, 
+             position = "jitter") +
+  #theme_minimal() +
+  #the hashtag numbers are hexcodes for colors, na.translate = F is a way of removing the NA count
+  scale_color_manual(values = c("#009E73","#CC79A7"), 
+                     na.translate = F) +
+  #lab(...) changes the labels of the graph
+  labs(title = "Distribution of Body Mass across Penguin Sex",
+       subtitle = "Body Mass and Sex for Each island",
+       #renaming the x-axis, y-axis, and the legend titles of color and shape to what is in quotations
+       x = "Island",
+       y = "Body mass (g)",
+       color = "Penguin sex",
+       shape = "Penguin island") +
+  theme_minimal()
+  

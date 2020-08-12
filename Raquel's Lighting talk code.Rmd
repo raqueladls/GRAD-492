@@ -1,0 +1,75 @@
+---
+title: "Raquel's lightning Talk"
+author: "Raquel De Los Santos"
+date: "8/8/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+#install remotes
+install.packages("remotes")
+
+#install data
+remotes::install_github("allisonhorst/palmerpenguins")
+library(palmerpenguins)
+View(penguins)
+library(tidyverse)
+ggplot(data = penguins , 
+                       aes(x = flipper_length_mm,
+                           y = body_mass_g)) +
+  geom_point(aes(color = species, 
+                 shape = species),
+             size = 3,
+             alpha = 0.8) +
+  #theme_minimal() +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) +
+  labs(title = "Penguin size, Palmer Station LTER",
+       subtitle = "Flipper length and body mass for Adelie, Chinstrap and Gentoo Penguins",
+       x = "Flipper length (mm)",
+       y = "Body mass (g)",
+       color = "Penguin species",
+       shape = "Penguin species") +
+  theme_minimal()
+  #data visualize for Raquels lighting presentation
+ggplot(data = penguins, aes(x = species, y =bill_length_mm )) +
+  #geom_point changes the characteristic of the points in scatter plot
+  #aes uses the sex and island to define what the output of color and shape will be
+  geom_point(aes(color = species), 
+             #change the size of point, alpha is opacity, and position jitter prevents overlap
+             size = 3,
+             alpha = 0.65, 
+             position = "jitter") +
+  #theme_minimal() +
+  #the hashtag numbers are hexcodes for colors, na.translate = F is a way of removing the NA count
+  #lab(...) changes the labels of the graph
+  labs(title = "Distribution of Bill length across Penguin Species",
+       subtitle = "Species and Bill Length",
+       #renaming the x-axis, y-axis, and the legend titles of color and shape to what is in quotations
+       x = "Species",
+       y = "Bill Length (g)",
+       color = "Penguin Species",
+       shape = "Penguin Bill Length") +
+  theme_minimal()
